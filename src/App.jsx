@@ -1,160 +1,175 @@
-import { useEffect, useMemo, useState } from 'react'
-import AboutSection from './components/AboutSection'
-import RepoList from './components/RepoList'
-import ContactCard from './components/ContactCard'
-import Reveal from './components/Reveal'
-
 export default function App() {
-  const [progress, setProgress] = useState(0)
+  const year = new Date().getFullYear()
 
-  useEffect(() => {
-    // 默认启用深色模式（Tailwind 的 `dark:` 变体依赖这个 class）
-    document.documentElement.classList.add('dark')
-  }, [])
+  // 占位：请将下方链接替换为你自己的美团/大众点评链接
+  const meituanUrl = 'https://meituan.example.com/your-shop'
+  // 占位：请将下方链接替换为你自己的抖音团购链接
+  const douyinUrl = 'https://douyin.example.com/your-shop'
 
-  useEffect(() => {
-    const onScroll = () => {
-      const doc = document.documentElement
-      const max = doc.scrollHeight - doc.clientHeight
-      const next = max > 0 ? window.scrollY / max : 0
-      setProgress(next)
-    }
-
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const nav = useMemo(
-    () => [
-      { id: 'about', label: '个人简介' },
-      { id: 'repos', label: 'GitHub 仓库' },
-      { id: 'contact', label: '联系我' },
-    ],
-    [],
-  )
-
-  const year = useMemo(() => new Date().getFullYear(), [])
+  const phone = '138-0000-0000' // 占位：电话
+  const wechat = 'juyicha-space' // 占位：微信号
 
   return (
-    <div className="min-h-screen">
-      <a
-        href="#about"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-3 focus:py-2 focus:text-black"
-      >
-        跳到主要内容
-      </a>
-
-      <div className="noise" aria-hidden="true" />
-
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-black/40 backdrop-blur">
-        <nav className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3">
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-fuchsia-500/80 via-cyan-400/70 to-indigo-500/80 shadow-neon" />
-            <div className="leading-tight">
-              <div className="text-sm font-semibold text-white/95">
-                Shafeipg 的开源灵感空间
-              </div>
-              <div className="text-xs text-white/60">Neon notes · Deep scroll</div>
+    <div className="min-h-screen bg-[#fcfaf2] text-[#332b21]">
+      <header className="border-b border-[#e4ddc8]/80 bg-[#fcfaf2]/95">
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between">
+          <div>
+            <div className="text-xl font-semibold tracking-[0.12em] sm:text-2xl">
+              居易茶空间
+            </div>
+            <div className="mt-1 text-xs font-medium text-[#6b5a43] sm:text-sm">
+              处于平易，随遇而安
             </div>
           </div>
-
-          <div className="hidden items-center gap-8 text-sm text-white/70 sm:flex">
-            {nav.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="transition hover:text-white/95"
-              >
-                {item.label}
-              </a>
-            ))}
+          <div className="text-xs text-[#8c7a5d] sm:text-right">
+            <div>以一盏清茶，留一刻缓慢。</div>
+            <div className="mt-0.5">Welcome to JuYi Tea Space.</div>
           </div>
-        </nav>
-
-        <div className="h-[2px] w-full bg-white/5">
-          <div
-            className="h-full bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-indigo-500"
-            style={{ width: `${Math.min(100, Math.max(0, progress * 100))}%` }}
-          />
         </div>
       </header>
 
       <main>
-        <section className="px-5 pb-14 pt-16">
+        {/* 核心操作区 */}
+        <section className="px-5 pb-10 pt-10 sm:pb-12 sm:pt-12">
           <div className="mx-auto max-w-5xl">
-            <div className="text-center">
-              <Reveal delay={0}>
-                <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                  把开源灵感，写成你的个人发光宇宙
-                </h1>
-              </Reveal>
+            <div className="max-w-xl">
+              <h1 className="text-2xl font-semibold tracking-wide sm:text-3xl">
+                在城市的一隅，安放一杯属于自己的茶
+              </h1>
+              <p className="mt-3 text-sm leading-relaxed text-[#6b5a43] sm:text-base">
+                居易，不必刻意讲究排场，只要放松坐下，听水声、看茶烟，就够了。线上只保留两个入口：一个是当下要用的预约渠道，一个是最简洁的到店方式。
+              </p>
+            </div>
 
-              <Reveal delay={120}>
-                <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-                  深色模式 · 流动霓虹渐变背景 · 丝滑滚动进入动画。下面的内容会用更“顺手”的方式展示：简介、仓库列表、以及一个清晰的联系入口。
-                </p>
-              </Reveal>
-
-              <Reveal delay={240}>
-                <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                  <a
-                    href="#repos"
-                    className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-white/85 shadow-neon transition hover:bg-white/10 hover:text-white"
-                  >
-                    查看 GitHub 仓库
-                  </a>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500/90 via-cyan-400/70 to-indigo-500/80 px-5 py-3 text-sm font-medium text-black shadow-neon transition hover:brightness-110"
-                  >
-                    联系我
-                  </a>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4">
+              <a
+                href={meituanUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-[60px] items-center justify-between rounded-xl border border-[#e4ddc8] bg-white/90 px-4 py-3 text-sm font-medium text-[#332b21] shadow-sm transition hover:bg-white sm:min-h-[72px] sm:px-5 sm:text-base"
+              >
+                <div>
+                  <div>美团预约</div>
+                  <div className="mt-1 text-xs font-normal text-[#8c7a5d]">
+                    建议优先使用，查看当日可预约时段
+                  </div>
                 </div>
-              </Reveal>
+                <span aria-hidden="true" className="text-base text-[#7c8a4b]">
+                  →
+                </span>
+              </a>
+
+              <a
+                href={douyinUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-[60px] items-center justify-between rounded-xl border border-[#e4ddc8] bg-[#f5efe0] px-4 py-3 text-sm font-medium text-[#332b21] shadow-sm transition hover:bg-[#f2ead7] sm:min-h-[72px] sm:px-5 sm:text-base"
+              >
+                <div>
+                  <div>抖音团购</div>
+                  <div className="mt-1 text-xs font-normal text-[#8c7a5d]">
+                    购买团购套餐，到店出示核销即可
+                  </div>
+                </div>
+                <span aria-hidden="true" className="text-base text-[#7c8a4b]">
+                  →
+                </span>
+              </a>
             </div>
           </div>
         </section>
 
-        <section id="about" className="scroll-mt-24 px-5 pb-14">
+        {/* 产品展示区 */}
+        <section className="px-5 pb-14 sm:pb-16">
           <div className="mx-auto max-w-5xl">
-            <Reveal delay={0}>
-              <div className="mb-6 flex items-center gap-3">
-                <div className="h-2 w-14 rounded-full bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-indigo-500" />
-                <h2 className="text-xl font-semibold text-white">个人简介</h2>
+            <div className="mb-6 flex items-baseline justify-between gap-3">
+              <h2 className="text-lg font-semibold tracking-wide sm:text-xl">
+                在这里，你可以慢慢挑
+              </h2>
+              <div className="hidden text-xs text-[#8c7a5d] sm:block">
+                精选好茶 · 匠心茶具 · 私密茶室
               </div>
-            </Reveal>
-            <AboutSection />
-          </div>
-        </section>
+            </div>
 
-        <section id="repos" className="scroll-mt-24 px-5 pb-14">
-          <div className="mx-auto max-w-5xl">
-            <Reveal delay={0}>
-              <div className="mb-6 flex items-center gap-3">
-                <div className="h-2 w-14 rounded-full bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-indigo-500" />
-                <h2 className="text-xl font-semibold text-white">GitHub 仓库列表展示区</h2>
-              </div>
-            </Reveal>
-            <RepoList />
-          </div>
-        </section>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <article className="flex flex-col rounded-2xl border border-[#e4ddc8] bg-white/95 px-4 py-4 sm:px-5 sm:py-5">
+                <div className="flex items-center gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f3ebd9] text-sm"
+                  >
+                    茶
+                  </span>
+                  <h3 className="text-sm font-semibold sm:text-base">精选好茶</h3>
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-[#6b5a43] sm:text-sm">
+                  根据当季气候与体感状态，推荐适合当下的一壶：龙井、岩茶、普洱、生熟茶……只取干净、稳定的一线货源。
+                </p>
+                <div className="mt-3 text-xs text-[#8c7a5d]">
+                  参考价格：单壶 ¥68 - ¥188
+                </div>
+              </article>
 
-        <section id="contact" className="scroll-mt-24 px-5 pb-20">
-          <div className="mx-auto max-w-5xl">
-            <Reveal delay={0}>
-              <div className="mb-6 flex items-center gap-3">
-                <div className="h-2 w-14 rounded-full bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-indigo-500" />
-                <h2 className="text-xl font-semibold text-white">联系我</h2>
-              </div>
-            </Reveal>
-            <ContactCard />
+              <article className="flex flex-col rounded-2xl border border-[#e4ddc8] bg-white/95 px-4 py-4 sm:px-5 sm:py-5">
+                <div className="flex items-center gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e9e2cf] text-sm"
+                  >
+                    具
+                  </span>
+                  <h3 className="text-sm font-semibold sm:text-base">匠心茶具</h3>
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-[#6b5a43] sm:text-sm">
+                  使用手工盖碗、紫砂壶与温润木托，让器物和茶汤一起“缓下来”，也为你留一点亲手泡茶的小仪式感。
+                </p>
+                <div className="mt-3 text-xs text-[#8c7a5d]">
+                  参考价格：茶具 ¥39 起，礼盒 ¥128 起
+                </div>
+              </article>
+
+              <article className="flex flex-col rounded-2xl border border-[#e4ddc8] bg-white/95 px-4 py-4 sm:px-5 sm:py-5">
+                <div className="flex items-center gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e4decf] text-sm"
+                  >
+                    室
+                  </span>
+                  <h3 className="text-sm font-semibold sm:text-base">私密茶室</h3>
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-[#6b5a43] sm:text-sm">
+                  小面积包间，适合两三位朋友安静聊天，也可以一个人带书、带电脑，待上一整个下午。
+                </p>
+                <div className="mt-3 text-xs text-[#8c7a5d]">
+                  参考价格：人均 ¥88 - ¥168
+                </div>
+              </article>
+            </div>
+
+            <p className="mt-5 text-xs text-[#8c7a5d] sm:hidden">
+              提示：更多图片与环境展示，可在美团或抖音详情页查看。
+            </p>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/5 py-10 text-center text-xs text-white/50">
-        © {year} · Shafeipg · Shafeipg 的开源灵感空间
+      <footer className="border-t border-[#e4ddc8] bg-[#fcfaf2]/95">
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="text-xs text-[#6b5a43] sm:text-sm">
+            <div>联系方式：</div>
+            <div className="mt-1">
+              微信号：<span className="font-medium">{wechat}</span>
+            </div>
+            <div>
+              电话：<span className="font-medium">{phone}</span>
+            </div>
+          </div>
+          <div className="text-xs text-[#a0937a] sm:text-right">
+            <div>© {year} 居易茶空间</div>
+            <div className="mt-1">本页仅作简单线上介绍，一切以店内实际为准。</div>
+          </div>
+        </div>
       </footer>
     </div>
   )
